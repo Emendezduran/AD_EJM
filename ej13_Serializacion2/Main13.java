@@ -13,7 +13,8 @@ public class Main13 {
 
     public static void main(String[] args) {
 
-        File txt = new File("C:\\Users\\Emili\\Documents\\DanielCastelao\\AD\\Ejercicios\\ficheiros\\texto13.txt");
+        //File txt = new File("C:\\Users\\Emili\\Documents\\DanielCastelao\\AD\\Ejercicios\\ficheiros\\texto13.txt");
+        File txt = new File("/home/oracle/NetBeansProjects/AD_Ejercicios/AD_EJM/ficheiros/texto13.txt");
         
         ObjectOutputStream write;
         ObjectInputStream read;
@@ -22,20 +23,20 @@ public class Main13 {
         String[] desc = {"parafusos", "cravos ", "tachas"};
         Double[] prezo = {3.0, 4.0, 5.0};
 
-        Productos p1 = new Productos();
-        Productos p2 = new Productos();
-        Productos p3 = new Productos();
+        Producto p1 = new Producto();
+        Producto p2 = new Producto();
+        Producto p3 = new Producto();
         
-        ArrayList<Productos> listaProductos = new ArrayList<>();
+        ArrayList<Producto> listaProductos = new ArrayList<>();
 
         for (int i = 0; i < cod.length; i++) {
-             listaProductos.add(new Productos(cod[i], desc[i], prezo[i]));
+             listaProductos.add(new Producto(cod[i], desc[i], prezo[i]));
         }
         
         try 
         {
             write = new ObjectOutputStream(new FileOutputStream(txt)); 
-            for(Productos producto : listaProductos)
+            for(Producto producto : listaProductos)
             {
             write.writeObject(producto);
             }
@@ -45,7 +46,7 @@ public class Main13 {
             ex.printStackTrace();
         }
 
-        ArrayList<Productos> productosLeidos = new ArrayList<>();
+        ArrayList<Producto> productosLeidos = new ArrayList<>();
         try {
             read = new ObjectInputStream(new BufferedInputStream(new FileInputStream(txt)));
             while(true){
@@ -53,7 +54,7 @@ public class Main13 {
                 if (obj == null){
                     break;
                 }
-            productosLeidos.add((Productos)obj);
+            productosLeidos.add((Producto)obj);
             }
             read.close();
         } catch (Exception ex) {

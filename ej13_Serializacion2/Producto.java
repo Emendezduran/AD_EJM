@@ -2,19 +2,19 @@ package ej13_Serializacion2;
 
 import java.io.Serializable;
 
-public class Productos implements Serializable{
+public class Producto implements Serializable{
     
     private String codigo;
     private String descripcion;
     private double precio;
     
-    public Productos(){
+    public Producto(){
         codigo = null;
         descripcion = null;
         precio = 0;
     }
     
-    public Productos(String codigo, String descripcion, double precio){
+    public Producto(String codigo, String descripcion, double precio){
         
     }
 

@@ -8,7 +8,6 @@ ler dende o  ficheiro que creache no  exercicio Serializacion2 os obxectos que a
  */
 package ej16_XMLwriter;
 
-
 import ej13_Serializacion2.Producto;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -22,36 +21,35 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 public class XMLWriter {
-    
+
     public static File txt = new File("/home/oracle/NetBeansProjects/AD_Ejercicios/AD_EJM/ficheiros/texto13.txt");
-    
+
     public static void main(String[] args) throws IOException {
-        
-       ArrayList<Producto> productos = leerProductos(txt);
-       productos.get(0).toString();
-       productos.get(1).toString();
-       productos.get(2).toString();
-       
-       File xml = new File("/home/oracle/NetBeansProjects/AD_Ejercicios/AD_EJM/ficheiros/texto16.xml");
-       
-       /*
-        try
-        {
+
+        ArrayList<Producto> productos = leerProductos(txt);
+
+        for (int i = 0; i < productos.size(); i++) {
+            System.out.println(productos.get(i).toString());
+        }
+
+        File xml = new File("/home/oracle/NetBeansProjects/AD_Ejercicios/AD_EJM/ficheiros/texto16.xml");
+
+        try {
             XMLStreamWriter xmlSW = XMLOutputFactory.newInstance().createXMLStreamWriter(new FileWriter(xml));
-            
+
             //VersionXML DeclaracionInicial
             xmlSW.writeStartDocument("1.0");
-            
+
             //EtiquetaRaizApertura
             //<productos>
             xmlSW.writeStartElement("productos");
-    
-         for (Producto producto : productos) {
-             
-             //<producto codigo="cod">
-            xmlSW.writeStartElement("producto");
-            xmlSW.writeAttribute("codigo", producto.getCodigo());
-            
+
+            for (Producto producto : productos) {
+
+                //<producto codigo="cod">
+                xmlSW.writeStartElement("producto");
+                xmlSW.writeAttribute("codigo", producto.getCodigo());
+
                 //<descripcion>
                 xmlSW.writeStartElement("descripcion");
                 xmlSW.writeCharacters(producto.getDescripcion());
@@ -63,42 +61,40 @@ public class XMLWriter {
                 xmlSW.writeCharacters(Double.toString(producto.getPrecio()));
                 //</titulo>
                 xmlSW.writeEndElement();
-    
-            //</producto>
-            xmlSW.writeEndElement();
-             
-         }       
-            
+
+                //</producto>
+                xmlSW.writeEndElement();
+
+            }
+
             //EtiquetaRaizCierre
             //</autores>
             xmlSW.writeEndElement();
             xmlSW.close();
-        }catch (XMLStreamException ex) 
-        {
+        } catch (XMLStreamException ex) {
             ex.printStackTrace();
         }
-*/
 
-     }
-    
-    public static ArrayList<Producto>leerProductos(File txt){
-        
-    ArrayList<Producto> productosLeidos = new ArrayList<>();
-    
-    ObjectInputStream read;
+    }
+
+    public static ArrayList<Producto> leerProductos(File txt) {
+
+        ArrayList<Producto> productosLeidos = new ArrayList<>();
+
+        ObjectInputStream read;
         try {
             read = new ObjectInputStream(new BufferedInputStream(new FileInputStream(txt)));
-            while(true){
+            while (true) {
                 Object obj = read.readObject();
-                if (obj == null){
+                if (obj == null) {
                     break;
                 }
-            productosLeidos.add((Producto)obj);
+                productosLeidos.add((Producto) obj);
             }
             read.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return productosLeidos;
-    } 
+    }
 }

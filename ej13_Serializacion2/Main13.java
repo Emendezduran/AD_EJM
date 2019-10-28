@@ -15,30 +15,25 @@ public class Main13 {
 
         //File txt = new File("C:\\Users\\Emili\\Documents\\DanielCastelao\\AD\\Ejercicios\\ficheiros\\texto13.txt");
         File txt = new File("/home/oracle/NetBeansProjects/AD_Ejercicios/AD_EJM/ficheiros/texto13.txt");
-        
+
         ObjectOutputStream write;
         ObjectInputStream read;
-        
+
         String[] cod = {"p1", "p2", "p3"};
         String[] desc = {"parafusos", "cravos ", "tachas"};
         Double[] prezo = {3.0, 4.0, 5.0};
 
-        Producto p1 = new Producto();
-        Producto p2 = new Producto();
-        Producto p3 = new Producto();
-        
         ArrayList<Producto> listaProductos = new ArrayList<>();
 
         for (int i = 0; i < cod.length; i++) {
-             listaProductos.add(new Producto(cod[i], desc[i], prezo[i]));
+            listaProductos.add(new Producto(cod[i], desc[i], prezo[i]));
+            System.out.println("insertado");
         }
-        
-        try 
-        {
-            write = new ObjectOutputStream(new FileOutputStream(txt)); 
-            for(Producto producto : listaProductos)
-            {
-            write.writeObject(producto);
+
+        try {
+            write = new ObjectOutputStream(new FileOutputStream(txt));
+            for (Producto producto : listaProductos) {
+                write.writeObject(producto);
             }
             write.writeObject(null);
             write.close();
@@ -47,18 +42,23 @@ public class Main13 {
         }
 
         ArrayList<Producto> productosLeidos = new ArrayList<>();
+
         try {
             read = new ObjectInputStream(new BufferedInputStream(new FileInputStream(txt)));
-            while(true){
+            while (true) {
                 Object obj = read.readObject();
-                if (obj == null){
+                if (obj == null) {
                     break;
                 }
-            productosLeidos.add((Producto)obj);
+                productosLeidos.add((Producto) obj);
             }
             read.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+
+        for (int i = 0; i < cod.length; i++) {
+            System.out.println(productosLeidos.get(i).toString());
         }
 
     }

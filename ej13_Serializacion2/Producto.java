@@ -9,13 +9,13 @@ public class Producto implements Serializable{
     private double precio;
     
     public Producto(){
-        codigo = null;
-        descripcion = null;
-        precio = 0;
+      
     }
     
     public Producto(String codigo, String descripcion, double precio){
-        
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.precio = precio;
     }
 
     public String getCodigo() {

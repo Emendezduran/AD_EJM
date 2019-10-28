@@ -38,7 +38,7 @@ public class Producto implements Serializable{
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 

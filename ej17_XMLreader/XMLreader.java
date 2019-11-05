@@ -8,10 +8,12 @@ package ej17_XMLreader;
 
 import ej13_Serializacion2.Producto;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 /**
@@ -20,7 +22,7 @@ import javax.xml.stream.XMLStreamReader;
  */
 public class XMLreader {
     
-       static File xml = new File("C:\\Users\\Emili\\Documents\\DanielCastelao\\AD\\Ejercicios\\ficheiros\\texto16.xml");
+       static File xml = new File("/home/oracle/NetBeansProjects/AD_Ejercicios/AD_EJM/ficheiros/texto16.xml");
 
     private static ArrayList<Producto> getProducto() {
         ArrayList<Producto> productos = new ArrayList<>();
@@ -30,7 +32,6 @@ public class XMLreader {
             Producto producto = null;
             while (xmlSR.hasNext()) {
                 if (xmlSR.getEventType() == XMLStreamConstants.START_ELEMENT) {
-                    System.out.println(xmlSR.getEventType() + " " + xmlSR.getLocalName());
                     if (xmlSR.getLocalName() == "producto") {
                         producto = new Producto();     
                         producto.setCodigo(xmlSR.getAttributeValue(0));
@@ -42,8 +43,8 @@ public class XMLreader {
                         producto.setPrecio(Double.parseDouble(xmlSR.getElementText()));
                         }
                     }
+                    xmlSR.next();
                 }
-                xmlSR.next();
                   
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -61,6 +62,12 @@ public class XMLreader {
     }
     
     public static void main(String[] args) {
+
+        ArrayList<Producto> productos = getProducto();
+        
+        for (int i = 0; i < productos.size(); i++) {
+            System.out.println(productos.get(i).toString());
+        }
         
     }
     

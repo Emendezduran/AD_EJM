@@ -181,7 +181,7 @@ public class BRB {
         mostrarTabla();
         updatePrecio("c2",8);
         mostrarTabla();
-        Producto producto = new Producto("c3","p3", 4);
+        Producto producto = new Producto("c3","p3", 4.5);
         insertarFila(producto);
         mostrarTabla();
         borrarFila("c3");
